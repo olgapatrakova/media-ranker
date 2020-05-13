@@ -1,0 +1,15 @@
+<h1>List of Works</h1>
+<% if @works.length > 0 %>
+  <ol class= 'work-index'>
+    <% @works.each do |work|  %>
+      <li>
+        <header><strong><%= link_to(work.title, work_path(work.id) ) %></strong></header>
+        <%= work.creator %>
+        <%= work.publication_year %>
+        Upvote
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <h3>No works in the system!</h3>
+<% end %>
