@@ -1,0 +1,17 @@
+<h2><%= @work.title%></h2>
+<p>Created by: <%= @work.creator %></p>
+<p>Published: <%= @work.publication_year %></p>
+<p><%= @work.description %></p>
+<%= link_to "Back to media ranks", works_path %>
+<%= link_to "Edit", edit_work_path(@work.id) %>
+<%= button_to "Upvote", edit_work_path(@work) %>
+<%= button_to "Delete Work", work_path(@work), method: :delete, data: {confirm: "Are you sure?"} %>
+
+
+  <table class=work-heading>
+    <tr>
+      <h3 class="works-votes__header">Votes for this <%= @work.category.capitalize %></h3>
+        <th>User</th>
+        <th>Date</th>
+    </table>
+</section>  

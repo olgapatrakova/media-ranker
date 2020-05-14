@@ -1,5 +1,9 @@
 <%= form_with model: @work, class: 'create-work' do |f| %>
-  <h1> <%= action_name%> this <%= @work.category %></h1>
+<% if action_name == "Edit"%>
+  <h1> <%= action_name %> this <%@work.category%> </h1>
+<% else %>
+  <h1> <%= action_name %> a new work </h1>
+<% end %>
 
   <% if @work.errors.any? %>
     <ul class="errors">
@@ -13,7 +17,7 @@
 
 <div>
   <%= f.label :category %>
-  <%= f.text_field :category %>
+  <%= f.select :category, ["album", "book", "movie"] %>
 </div>
 <div>
   <%= f.label :title %>
@@ -29,9 +33,13 @@
 </div>
 <div>
   <%= f.label :description %>
-  <%= f.text_field :description %>
+  <%= f.text_area :description %>
 </div>
-  <%= f.submit "#{action_name} Work", class: "work-button" %>
+<% if action_name == "Edit"%>
+  <%= f.submit "Update Work", class: "work-button" %>
+<% else %>
+  <%= f.submit "Create Work", class: "work-button" %>
+<% end %>
 </div>
 
 <% end %>
