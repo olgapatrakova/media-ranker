@@ -16,8 +16,8 @@ class WorksController < ApplicationController
     @work = Work.new
   end
 
-  def create # Set the availability status to true by default
-    @work = Work.new
+  def create
+    @work = Work.new(work_params)
 
     if @work.save 
       redirect_to work_path(@work.id)
