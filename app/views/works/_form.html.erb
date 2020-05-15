@@ -6,15 +6,6 @@
     <h1> <%= action_name %> a new work </h1>
   <% end %>
 
-    <% if @work.errors.any? %>
-      <ul class="errors">
-        <% @work.errors.each do |column, message| %>
-          <li>
-            <strong><%= column.capitalize %> <%= message %> </strong>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
 
   <div class="form-group">
     <%= f.label :category %>

@@ -38,6 +38,26 @@
     </nav>
   </header>
   <body>
+
+  <section class="alert__container">
+    <% flash.each do |name, message| %>
+      <div class="alert alert-warning">
+        <span class="<%= name %>">
+          <%= message %>
+        </span>
+      <% if @work.errors.any? %>
+        <ul class="errors">
+          <% @work.errors.each do |column, message| %>
+            <li>
+              <%= column %>: <%= message %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      </div>
+    <% end %>
+  </section>
+
     <%= yield %>
   </body>
 </html>
