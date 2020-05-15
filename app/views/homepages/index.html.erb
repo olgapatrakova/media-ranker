@@ -2,7 +2,8 @@
   <section class="spotlight">
     <h2 class="spotlight__header">
       <span class="spotlight__header--prefix">Media Spotlight</span>
-      <a class="spotlight__link-to" href="/works/596">Hi there</a> by Makoto Shinkai
+      <%= link_to "#{@works.first.title}", work_path(@works.first.id), class: "spotlight__link-to"%>
+      <%= "by #{@works.first.creator}"%>
     </h2>
     <p class="spotlight__description">
       20 votes - Anime
@@ -15,13 +16,16 @@
     Top Movies
   </h2>
   <ul class="list-group top-ten__list">
+    <% @works.where(category: "movie").each do |movie| %>
       <li class="list-group-item">
         <h4>
-          <a href="/works/596">your name.</a>
-          <small class="top-ten__creator">by Makoto Shinkai</small>
+          <%= link_to "#{movie.title}", work_path(movie.id)%>
+          <small class="top-ten__creator">by <%= movie.creator %></small>
         </h4>
         <p>20 votes</p>
       </li>
+    <% end %>
+  </ul>
   </section>
 
   <section class="top-ten__list-container">
@@ -29,13 +33,15 @@
     Top Books
   </h2>
   <ul class="list-group top-ten__list">
+    <% @works.where(category: "book").each do |book| %>
       <li class="list-group-item">
         <h4>
-          <a href="/works/599">huh</a>
-          <small class="top-ten__creator">by Katty</small>
+          <%= link_to "#{book.title}", work_path(book.id)%>
+          <small class="top-ten__creator">by <%= book.creator %></small>
         </h4>
         <p>4 votes</p>
       </li>
+    <% end %>
   </ul>
 </section>
 
@@ -44,13 +50,15 @@
     Top Albums
   </h2>
   <ul class="list-group top-ten__list">
+    <% @works.where(category: "album").each do |album| %>
       <li class="list-group-item">
         <h4>
-          <a href="/works/571">Kreb-Full-o Been</a>
-          <small class="top-ten__creator">by Ms. Trevion Buckridge</small>
+          <%= link_to "#{album.title}", work_path(album.id)%>
+          <small class="top-ten__creator">by <%= album.creator %></small>
         </h4>
-        <p>8 votes</p>
+        <p>4 votes</p>
       </li>
+    <% end %>
   </ul>
 </section>
 
