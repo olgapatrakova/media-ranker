@@ -1,12 +1,11 @@
-<main>
-  <%= form_with model: @work, class: 'create-work' do |f| %>
-  <% if action_name == "Edit"%>
-    <h1> <%= action_name %> this <%= @work.category %> </h1>
-  <% else %>
-    <h1> <%= action_name %> a new work </h1>
-  <% end %>
+<%= form_with model: @work, class: 'create-work' do |f| %>
+<% if action_name == "Edit"%>
+  <h1> <%= action_name %> this <%= @work.category %> </h1>
+<% else %>
+  <h2> <%= action_name %> a new work </h2>
+<% end %>
 
-
+<section>
   <div class="form-group">
     <%= f.label :category %>
     <%= f.select :category, ["album", "book", "movie"], {}, { class: "form-control" } %>
@@ -35,4 +34,4 @@
   </div>
 
   <% end %>
-</main>
+</section>
