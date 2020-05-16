@@ -1,6 +1,16 @@
 require "test_helper"
 
 describe Work do
+  it "has the required fields" do
+    # Arrange
+    new_work = works(:summer)
+    [:category, :title, :creator, :publication_year, :description].each do |f|
+      
+      # Assert
+      expect(new_work).must_respond_to f
+    end
+  end
+
   describe 'validations' do
     it "is valid when all fields are filled" do
       work = works(:summer)
