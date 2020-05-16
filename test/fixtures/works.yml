@@ -1,0 +1,17 @@
+wakeup:
+  category: album
+  title: Wake-up Pie
+  creator: Timmy Streich I
+  publication_year: 1919
+  description: Voluptatem consequatur qui consectetur nisi officiis culpa.
+summer:
+  category: movie
+  title: Summer Select
+  creator: Ms. Gwendolyn Ortiz
+  publication_year: 1946
+  description: Et molestiae eos nam odit aut sed.
+missing_title:
+  category: album
+  creator: Ortiz
+  publication_year: 1947
+  description: missing description
