@@ -7,10 +7,11 @@ describe UsersController do
       must_respond_with :success
     end
 
-    # it "must get login" do
-    #   get users_login_url
-    #   must_respond_with :success
-    # end
+    it "must get login" do
+      # get users_login_url
+      get login_path
+      must_respond_with :success
+    end
 
     it "can login a new user" do
       user = nil
