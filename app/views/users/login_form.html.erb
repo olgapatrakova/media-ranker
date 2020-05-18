@@ -1,2 +1,25 @@
-<h1>Users#login_form</h1>
-<p>Find me in app/views/users/login_form.html.erb</p>
+<h2>Log In</h2>
+<%= form_with model: @user, url: login_path do |f| %>
+  <div class="form-group">
+    <%= f.label :username %>
+    <%= f.text_field :username, { class: "form-control" } %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Log In", class: "btn btn-primary"%>
+  </div>
+<% end %>
+
+<article>
+  <h4>A note about logging in</h4>
+  <p>
+    There is no password field. In fact, there is no indication whatsoever
+    that you are who you say you are. There's nothing special about users -
+    username is just another piece of data that the user entered and we have to keep
+    track of.
+  </p>
+
+  <p>
+    We'll learn more about security and authentication in the next couple weeks.
+    For now, don't worry about it beyond what you can see here.
+  </p>
+</article>
