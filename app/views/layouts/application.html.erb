@@ -54,7 +54,7 @@
               <span class="<%= name %>">
                 <%= message %>
               </span>
-            <% if @work.errors.any? %>
+            <% if @work && @work.errors.any? %>
               <ul class="errors">
                 <% @work.errors.each do |column, message| %>
                   <li>
