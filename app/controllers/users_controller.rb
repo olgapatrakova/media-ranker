@@ -21,6 +21,32 @@ class UsersController < ApplicationController
     end
 
     session[:user_id] = user.id
+    session[:username] = user.username
     redirect_to root_path
+  end
+
+  def logout
+    if session[:user_id]
+      user = User.find_by(id: session[:user_id])
+      unless user.nil?
+        session[:user_id] = nil
+        flash[:success] = "Successfully logged out"
+      else
+        session[:user_id] = nil
+        flash[:error] = "Error Unknown User"
+      end
+    else
+      flash[:error] = "You must be logged in to logout"
+    end
+    redirect_to root_path
+  end
+
+  def current
+    @user = User.find_by(id: session[:user_id])
+    if @user.nil?
+      flash[:error] = "You must be logged in to view this page"
+      redirect_to root_path
+      return
+    end
   end
 end
