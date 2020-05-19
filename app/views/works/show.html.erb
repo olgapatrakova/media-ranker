@@ -6,7 +6,7 @@
   <section>
     <%= link_to "Back to media ranks", root_path, class: "btn btn-primary" %>
     <%= link_to "Edit", edit_work_path(@work.id), class: "btn btn-primary" %>
-    <%= link_to "Upvote", upvote_path, method: :post, class: "btn btn-primary"%>
+    <%= link_to "Upvote", work_upvote_path(@work.id), method: :post, params: {:vote => {:user_id => session[:user_id]}}, class: "btn btn-primary"%>
     <%= link_to "Delete Work", work_path(@work), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
   </section>
 </section>
