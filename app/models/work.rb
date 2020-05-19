@@ -8,10 +8,10 @@ class Work < ApplicationRecord
   end
 
   def self.all_categories
-    # find distinct categories
-    categories_find = self.select(:category).distinct # returns active records
-    # create an array with categories
-    categories = categories_find.map { |cat| cat.category }
-    return categories
+    categories = []
+    self.all.each do |work|
+      categories << work.category
+    end
+    return categories.uniq
   end
 end
