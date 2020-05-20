@@ -14,8 +14,22 @@
   <h3 class="works-votes__header">Votes for this <%= @work.category %></h3>
 
   <table class=table>
-    <tr>
-        <th>User</th>
+    <thead>
+      <tr>
+        <th width="608">User</th>
         <th>Date</th>
-    </table>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% if @work.users %>
+        <% @work.votes.each do |vote| %>
+          <tr>
+            <td><%= link_to(vote.user.username, user_path(vote.user_id) ) %></td>
+            <td><%= vote.created_at.to_s.to_time.strftime('%B %e, %Y') %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </section>  

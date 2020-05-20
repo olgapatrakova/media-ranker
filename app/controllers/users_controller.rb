@@ -3,6 +3,15 @@ class UsersController < ApplicationController
     @users = User.all.order("created_at")
   end
 
+  def show
+    @user = User.find_by(id: params[:id])
+
+    if @user.nil?
+      redirect_to users_path
+      return
+    end
+  end
+
   def login_form
     @user = User.new
   end

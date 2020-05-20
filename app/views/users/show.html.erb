@@ -1,0 +1,28 @@
+<h2>User Summary: <%= @user.username %></h2>
+<p>Joined site <%= @user.created_at.to_s.to_time.strftime('%B %e, %Y') %></p>
+
+<section class="user-votes__container">
+  <h3 class="user-votes__header">Votes</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Media Title</th>
+        <th>Created By</th>
+        <th>Published</th>
+        <th>Category</th>
+        <th>Voted On</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.votes.each do |vote| %>
+        <tr>
+          <td><%= link_to(vote.work.title, work_path(vote.work_id) ) %></td>
+          <td><%= vote.work.creator %></td>
+          <td><%= vote.work.publication_year %></td>
+          <td><%= vote.work.category %></td>
+          <td><%= vote.created_at.to_s.to_time.strftime('%B %e, %Y') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
