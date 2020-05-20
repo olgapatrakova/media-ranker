@@ -1,11 +1,10 @@
 class WorksController < ApplicationController
+  before_action :find_work, only: [:show, :edit, :update, :destroy]
   def index
     @works = Work.all.order("created_at") # maintains order 
   end
 
   def show
-    @work = Work.find_by(id: params[:id])
-
     if @work.nil?
       redirect_to works_path
       return
@@ -31,8 +30,6 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find_by(id: params[:id])
-
     if @work.nil?
       redirect_to works_path
       return
@@ -40,22 +37,22 @@ class WorksController < ApplicationController
   end
 
   def update
-    @work = Work.find_by(id: params[:id])
     if @work.nil?
+      flash[:error] = "You need to choose media first"
       redirect_to works_path
       return
     elsif @work.update(work_params)
+      flash[:success] = "Successfully updated #{@work.category} #{@work.id}"
       redirect_to work_path(@work.id) 
       return
     else 
+      flash[:error] = "Unable to update"
       render :edit, status: :not_found
       return
     end
   end
 
   def destroy
-    @work = Work.find_by(id: params[:id])
-
     if @work.nil?
       flash.now[:error] = "A problem occurred: Could not destroy #{@work.category} #{@work.id}"
       redirect_to works_path
@@ -71,5 +68,9 @@ class WorksController < ApplicationController
 
   def work_params
     return params.require(:work).permit(:category, :title, :creator, :publication_year, :description)
+  end
+
+  def find_work
+    @work = Work.find_by(id: params[:id])
   end
 end
