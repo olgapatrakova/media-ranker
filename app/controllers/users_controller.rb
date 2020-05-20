@@ -24,6 +24,7 @@ class UsersController < ApplicationController
       user = User.new(username: params[:user][:username])
       if ! user.save
         flash[:error] = "Unable to login"
+        flash[:validation_errors] = user.errors.to_hash(false)
         redirect_to root_path
         return
       end
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
   def logout
     if session[:user_id]
       user = User.find_by(id: session[:user_id])
-      unless user.nil?
+      if user
         session[:user_id] = nil
         flash[:success] = "Successfully logged out"
       else

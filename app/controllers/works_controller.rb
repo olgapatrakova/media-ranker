@@ -1,5 +1,6 @@
 class WorksController < ApplicationController
   before_action :find_work, only: [:show, :edit, :update, :destroy]
+
   def index
     @works = Work.all.order("created_at") # maintains order 
   end
@@ -24,6 +25,7 @@ class WorksController < ApplicationController
       return
     else 
       flash.now[:error] = "A problem occurred: Could not create #{@work.category}"
+      flash.now[:validation_errors] = @work.errors.to_hash(false)
       render :new, status: :not_found
       return
     end
@@ -46,7 +48,8 @@ class WorksController < ApplicationController
       redirect_to work_path(@work.id) 
       return
     else 
-      flash[:error] = "Unable to update"
+      flash.now[:error] = "Unable to update"
+      flash.now[:validation_errors] = @work.errors.to_hash(false)
       render :edit, status: :not_found
       return
     end
@@ -54,7 +57,7 @@ class WorksController < ApplicationController
 
   def destroy
     if @work.nil?
-      flash.now[:error] = "A problem occurred: Could not destroy #{@work.category} #{@work.id}"
+      flash.now[:error] = "A problem occurred: Could not delete work"
       redirect_to works_path
       return
     else

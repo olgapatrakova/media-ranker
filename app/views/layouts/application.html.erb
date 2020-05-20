@@ -45,40 +45,44 @@
             <%= link_to "Log In", login_path, class: "btn btn-primary"%>
           </li>
         <% end %>
-
-
         </ul>
       </nav>
     </header>
 
-    <% if !flash.empty? %>
+    <% if flash %>
       <section class="alert__container">
-        <% flash.each do |name, message| %>
-          <% if flash[:success] %>
+        <% if flash[:success] %>
           <div class="alert alert-success">
-            <span class="<%= name %>">
-              <%= message %>
+            <span class="success">
+              <%= flash[:success] %>
             </span>
           </div>
-          <% else %>
-            <div class="alert alert-warning">
-              <span class="<%= name %>">
-                <%= message %>
-              </span>
-            <% if @work && @work.errors.any? %>
-              <ul class="errors">
-                <% @work.errors.each do |column, message| %>
-                  <li>
-                    <%= column %>: <%= message %>
-                  </li>
-                <% end %>
-              </ul>
-            <% end %>
-            </div>
+        <% end %>
+
+        <% if flash[:error] || flash[:validation_errors]  %>
+          <div class="alert alert-warning">
+          <% if flash[:error] %>
+            <span class="error">
+              <%= flash[:error] %>
+            </span>
           <% end %>
+
+          <% if flash[:validation_errors] %>
+            <ul class="errors">
+              <% flash[:validation_errors].each do |column, messages| %>
+                <% messages.each do |message| %>
+                <li>
+                  <%= column %>: <%= message %>
+                </li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+          </div>
         <% end %>
       </section>
     <% end %>
+
     <main>
       <%= yield %>
     </main>
