@@ -1,12 +1,11 @@
   <section class="spotlight">
     <h2 class="spotlight__header">
       <span class="spotlight__header--prefix">Media Spotlight</span>
-      <%= link_to "#{@works.first.title}", work_path(@works.first.id), class: "spotlight__link-to"%>
-      <%= "by #{@works.first.creator}"%>
+      <%= link_to "#{@works.is_spotlight.title}", work_path(@works.is_spotlight.id), class: "spotlight__link-to"%>
+      <%= "by #{@works.is_spotlight.creator}"%>
     </h2>
     <p class="spotlight__description">
-      20 votes - 
-      <%= @works.first.description %>
+      <%= @works.is_spotlight.votes.count %> votes - <%= @works.is_spotlight.description %>
     </p>
   </section>
 
@@ -25,7 +24,7 @@
           <%= link_to "#{work.title}", work_path(work.id)%>
           <small class="top-ten__creator">by <%= work.creator %></small>
         </h4>
-        <p>20 votes</p>
+        <p><%= work.votes.count %> votes</p>
       </li>
     <% end %>
     </ul>

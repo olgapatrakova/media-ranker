@@ -49,7 +49,7 @@
       </nav>
     </header>
 
-    <% if flash %>
+    <% if !flash.empty? %>
       <section class="alert__container">
         <% if flash[:success] %>
           <div class="alert alert-success">
@@ -82,7 +82,6 @@
         <% end %>
       </section>
     <% end %>
-
     <main>
       <%= yield %>
     </main>

@@ -1,6 +1,5 @@
 <h2>List of Works</h2>
 <% if @works.length > 0 %>
-  
     <% Work.all_categories.each do |category|  %>
       <section class="media-table">
         <h4><%= category.capitalize %>s</h4>
@@ -8,16 +7,16 @@
         <thead>
           <tr>
             <th width="80">Votes</th>
-            <th width="440">Title</th>
+            <th width="574">Title</th>
             <th>Created By</th>
             <th width="100">Published</th>
             <th width="100">Upvote</th>
             </tr>
         </thead>
         <tbody>
-          <% @works.find_top(category).each do |work| %>
+          <% @works.split_and_sort(category).each do |work| %>
             <tr>
-              <td>11</td>
+              <td><%= work.votes.count %></td>
               <td><%= link_to(work.title, work_path(work.id) ) %></td>
               <td><%= work.creator %></td>
               <td><%= work.publication_year %></td>
