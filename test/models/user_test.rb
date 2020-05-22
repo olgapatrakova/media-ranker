@@ -44,8 +44,9 @@ describe User do
 
   describe 'relations' do
     it "has 'votes' relationship" do
-      Vote.create(user_id: @user.id, work_id: works(:summer).id)
+      vote = Vote.create(user_id: @user.id, work_id: works(:summer).id)
       expect(@user.votes.count).must_equal 1
+      expect(@user.votes.first).must_equal vote
     end
 
     it 'permits a user to have many votes' do
@@ -62,6 +63,8 @@ describe User do
     it "has works through votes" do
       Vote.create(user_id: @user.id, work_id: works(:summer).id)
       expect(@user.works).wont_be_nil
+      expect(@user.works.count).must_equal 1
+      expect(@user.works.first.id).must_equal works(:summer).id
     end
   end
 end

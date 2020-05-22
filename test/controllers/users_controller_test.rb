@@ -46,25 +46,4 @@ describe UsersController do
       expect(session[:user_id]).must_be_nil
     end
   end
-
-  describe "current user" do
-    it "can return the page if the user is logged in" do
-      # Arrange
-      login()
-
-      # Act
-      get current_user_path
-
-      # Assert
-      must_respond_with :redirect
-    end
-
-    it "redirects us back if the user is not logged in" do
-      # Act
-      get current_user_path
-
-      # Assert
-      must_respond_with :redirect
-    end
-  end
 end
