@@ -46,4 +46,27 @@ describe Vote do
     end
   end
 
+  describe "relations" do
+    it "has a user" do
+      vote = Vote.create(work_id: @work.id, user_id: @user.id)
+      expect(vote.user).must_equal @user
+    end 
+
+    it "can set the user" do
+      vote = Vote.new(user_id: "1", work_id: "2")
+      vote.user = users(:grace)
+      expect(vote.user_id).must_equal users(:grace).id
+    end
+
+    it "has a work" do
+      vote = Vote.create(work_id: @work.id, user_id: @user.id)
+      expect(vote.work).must_equal works(:summer)
+    end 
+
+    it "can set the work" do
+      vote = Vote.create(user_id: "1", work_id: "2")
+      vote.work = works(:summer)
+      expect(vote.work_id).must_equal works(:summer).id
+    end
+  end
 end

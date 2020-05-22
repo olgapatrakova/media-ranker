@@ -42,6 +42,21 @@ describe Work do
     end
   end
 
+  describe "relations" do
+    it "must have votes association" do
+      work = works(:summer)
+      expect(work.votes.count).must_equal 0
+      expect(work.votes.count).wont_be_nil
+    end
+
+    it "must have users through votes" do
+      work = works(:summer)
+      vote = Vote.create(work_id: work.id, user_id: users(:grace).id)
+      expect(work.votes.count).must_equal 1
+      expect(work.users.first).must_equal users(:grace)
+    end
+  end
+
   describe "custom methods" do
     describe "self.all_categories" do
       it "can find all categories from existing active records" do
