@@ -9,9 +9,14 @@ before_action :require_login, only: [:upvote]
   end
 
   def require_login
+    p "require_login"
     if current_user.nil?
       flash[:error] = "A problem occurred: You must log in to do that"
+      p "A problem occurred: You must log in to do that"
       redirect_back(fallback_location: root_path)
+    else
+      p "no A problem occurred"
     end
+
   end
 end

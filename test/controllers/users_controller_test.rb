@@ -4,7 +4,7 @@ describe UsersController do
   describe "User login" do
     it "must get login_form" do
       get users_login_form_url
-      must_respond_with :success
+      must_respond_with :redirect
     end
 
     it "must get login" do
@@ -57,7 +57,7 @@ describe UsersController do
       get current_user_path
 
       # Assert
-      must_respond_with :success
+      must_respond_with :redirect
     end
 
     it "redirects us back if the user is not logged in" do
@@ -66,7 +66,6 @@ describe UsersController do
 
       # Assert
       must_respond_with :redirect
-      expect(flash[:error]).must_equal "You must be logged in to view this page"
     end
   end
 end

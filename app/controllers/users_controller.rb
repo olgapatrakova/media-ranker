@@ -18,12 +18,15 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: params[:user][:username])
-
+    p "user controller user #{user}"
     if user.nil?
       # New User
+      
       user = User.new(username: params[:user][:username])
+      p "user controller new user #{user}"
       if ! user.save
-        flash[:error] = "Unable to login"
+        p "not saved"
+        flash[:error] = "A problem occurred: Could not log in"
         flash[:validation_errors] = user.errors.to_hash(false)
         redirect_to root_path
         return
@@ -36,6 +39,8 @@ class UsersController < ApplicationController
 
     session[:user_id] = user.id
     session[:username] = user.username
+    p "session #{session.to_hash}"
+
     redirect_to root_path
   end
 
