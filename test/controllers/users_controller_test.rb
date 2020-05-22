@@ -8,7 +8,6 @@ describe UsersController do
     end
 
     it "must get login" do
-      # get users_login_url
       get login_path
       must_respond_with :success
     end

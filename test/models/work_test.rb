@@ -104,6 +104,45 @@ describe Work do
         expect(top_albums).must_be_empty
       end
     end
+
+    describe "self.split_and_sort" do
+      it "returns records of the same category" do
+        # Arrange
+        all_albums = Work.split_and_sort('album')
+        # Assert
+        expect(all_albums.length).must_equal 1
+        expect(all_albums.first.category).must_equal "album"
+      end
+
+      it "returns works sorted by votes count" do
+        # Arrange
+        album = works(:wakeup)
+        new_album = Work.create!(category: "album", title: "new album")
+        user = users(:grace)
+        # Act
+        vote = Vote.create(work_id: new_album.id, user_id: user.id)
+        all_albums = Work.split_and_sort('album')
+
+        # Assert
+        expect(all_albums.length).must_equal 2
+        expect(all_albums[0]).must_equal new_album
+        expect(all_albums[1]).must_equal album
+      end
+    end
+
+    describe "self.is_spotlight" do
+      it "returns a work with maximum votes" do
+        # Arrange
+        album = works(:wakeup)
+        new_album = Work.create!(category: "album", title: "new album")
+        user = users(:grace)
+        # Act
+        vote = Vote.create(work_id: new_album.id, user_id: user.id)
+        spotlight = Work.is_spotlight
+        # Assert
+        expect(spotlight).must_equal new_album
+      end
+    end
   end
 end
  

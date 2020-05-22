@@ -3,13 +3,12 @@ require "test_helper"
 describe VotesController do
   it "must upvote" do
     # Arrange
-    login()
+    user  = login()
     work = works(:summer)
     # Act, assert
     expect {
       post work_upvote_url(work.id)
     }.must_change "Vote.count", 1
-    user  = User.find_by(username: "Grace")
     expect(Vote.last.user_id).must_equal user.id
     expect(Vote.last.work_id).must_equal work.id
     expect(flash[:success]).must_equal "Successfully upvoted!" 
