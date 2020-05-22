@@ -25,8 +25,12 @@ class Work < ApplicationRecord
     # join works and votes, take only those that present in both tables
     # group them to 1 table, count votes, return 1 with max value
     # gained help on that
-    spotlight_id = Work.joins(:votes).group("works.id").order("count_votes_id DESC").limit(1).count("votes.id").keys[0]
-    return Work.find_by(id: spotlight_id)
+    if Vote.count != 0
+      spotlight_id = Work.joins(:votes).group("works.id").order("count_votes_id DESC").limit(1).count("votes.id").keys[0]
+      return Work.find_by(id: spotlight_id)
+    else
+      return Work.first
+    end
   end
 
   def self.all_categories
