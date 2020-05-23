@@ -11,7 +11,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to(user.username, user_path(user.id) ) %></td>
-        <td>4</td>
+        <td><%= user.votes.count %></td>
         <td><%= user.created_at.to_s.to_time.strftime('%B %e, %Y') %></td>
       </tr>
     <% end %>

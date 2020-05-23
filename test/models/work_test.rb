@@ -157,6 +157,11 @@ describe Work do
         # Assert
         expect(spotlight).must_equal new_album
       end
+
+      it "returns the first work from database if there are no votes for any media" do
+        # Assert
+        expect(Work.is_spotlight).must_equal works(:summer)
+      end
     end
   end
 end
